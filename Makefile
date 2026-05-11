@@ -1,5 +1,3 @@
 run:
-	@python epx.pyc
-
-update:
-	@git pull
+	git pull
+	python epx.pyc

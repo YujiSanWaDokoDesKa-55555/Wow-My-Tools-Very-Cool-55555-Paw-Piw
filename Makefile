@@ -1,3 +1,2 @@
 run:
-	git pull
-	python epx.py
+	python cl.py

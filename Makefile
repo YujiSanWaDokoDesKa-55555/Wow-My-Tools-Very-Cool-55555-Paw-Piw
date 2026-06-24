@@ -1,3 +1,3 @@
 run:
 	git pull
-	python epx.pyc
+	python epx.py

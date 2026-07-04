@@ -33,6 +33,7 @@ fix: detectCLI
 		pip uninstall psutil -y; \
 		pip install requests; \
 		pip install "urllib3<2"; \
+		pip install --upgrade typing_extensions; \
 		bash python313.sh; \
 	else \
 		. venv/bin/activate && \
